@@ -179,14 +179,17 @@ app.intent('favorite fake color', (conv, { fakeColor }) => {
     conv.ask('Do you want to hear about another fake color?');
 });
 
-exports.handler = function (event, context, callback) {
-    app.handler(event, {}).then((res) => {
-        if (res.status != 200) {
-            callback(null, { "fulfillmentText": `I got status code: ${res.status}` });
-        } else {
-            callback(null, res.body);
-        }
-    }).catch((e) => {
-        callback(null, { "fulfillmentText": `There was an error\n${e}` });
-    });
+export const handler = (event: any, context: any, callback: (err: any, response: any) => void): void => {
+    console.log('event', event);
+    console.dir('context', context);
+    app.handler(event, {})
+        .then((res) => {
+            if (res.status != 200) {
+                callback(null, { 'fulfillmentText': `I got status code: ${res.status}` });
+            } else {
+                callback(null, res.body);
+            }
+        }).catch((e) => {
+            callback(null, { 'fulfillmentText': `There was an error\n${e}` });
+        });
 };
