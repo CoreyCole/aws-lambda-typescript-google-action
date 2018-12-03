@@ -1,0 +1,27 @@
+{
+    "name": "codelab-level-one",
+    "description": "Actions on Google Codelab Level 1",
+    "author": "Google Inc",
+    "private": true,
+    "scripts": {
+        "compile": "serverless webpack --out dist",
+        "zip": "npm run compile && cd dist/service/src && zip -X -r index.zip *",
+        "deploy": "npm run zip && aws --region us-west-2 lambda update-function-code --function-name halloo-corey-google --zip-file fileb://dist/service/src/index.zip"
+    },
+    "dependencies": {
+        "actions-on-google": "2.5.0"
+    },
+    "devDependencies": {
+        "@types/actions-on-google": "1.10.2",
+        "@types/aws-lambda": "8.10.15",
+        "@types/node": "10.12.11",
+        "serverless-plugin-bespoken": "0.1.3",
+        "serverless-webpack": "5.2.0",
+        "ts-loader": "5.3.1",
+        "tslint": "5.11.0",
+        "typescript": "2.8.3",
+        "webpack": "4.26.1",
+        "webpack-cli": "3.1.2",
+        "webpack-node-externals": "1.7.2"
+    }
+}
